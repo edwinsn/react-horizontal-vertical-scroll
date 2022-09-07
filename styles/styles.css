@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+}
+
+.HV-scroll-horizontal-container {
+    border: 1px solid red;
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.HV-scroll-vertical-container {
+    border: 1px solid blue;
+    width: 100vw;
+    overflow-x: hidden;
+}
