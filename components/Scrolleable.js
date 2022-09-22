@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useDimentionsUpdate } from './DimentionsContext';
 
-export default function Scrolleable({ children, className, position }) {
+export default function Scrolleable({ children, className, position, orientation, style }) {
 
     const ref = useRef();
     const updateChildrenDimentions = useDimentionsUpdate()
@@ -10,7 +10,7 @@ export default function Scrolleable({ children, className, position }) {
     useEffect(() => {
 
         const onResize = () => {
-            updateChildrenDimentions({ width: ref.current.clientWidth, height: ref.current.clientHeight, position })
+            updateChildrenDimentions({ width: ref.current.clientWidth, height: ref.current.clientHeight, position, orientation })
         }
 
         window.addEventListener("resize", onResize);
@@ -18,18 +18,19 @@ export default function Scrolleable({ children, className, position }) {
         return () => {
             window.removeEventListener("resize", onResize);
         }
-    }, [updateChildrenDimentions, position]);
+    }, [updateChildrenDimentions, position, orientation]);
 
 
     useEffect(() => {
 
-        updateChildrenDimentions?.({ width: ref.current.offsetWidth, height: ref.current.offsetHeight, position });
+        updateChildrenDimentions?.({ width: ref.current.offsetWidth, height: ref.current.offsetHeight, position, orientation });
 
-    }, [position, updateChildrenDimentions])
+    }, [position, updateChildrenDimentions, orientation])
 
 
     return (
         <div
+            style={style}
             ref={ref}
             className={className}
         >

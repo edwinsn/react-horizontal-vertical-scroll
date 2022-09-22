@@ -6,6 +6,7 @@ export default function VerticalScroll({ children, position }) {
   return (
     <Scrolleable
       position={position}
+      orientation="vertical"
       className='HV-scroll-vertical-container'
     >
       {children}

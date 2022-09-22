@@ -19,15 +19,14 @@ export function DimentionsProvider({ children }) {
 
     const [dimentions, setDimentions] = useState([]);
 
-    const updateDimentions = useCallback(({ width, height, position }) => {
+    const updateDimentions = useCallback(({ width, height, position, orientation }) => {
 
         setDimentions(dimentions => {
-            dimentions[position] = { width, height };
+            dimentions[position] = { width, height, orientation };
             return [...dimentions];
         });
 
     }, [])
-
 
     return (
         <DimentionsContext.Provider value={{ dimentions }}>
