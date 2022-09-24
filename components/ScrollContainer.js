@@ -1,30 +1,23 @@
 import React from 'react'
-import { useDimentions } from './DimentionsContext';
+import { useDimentions } from './DimentionsContext'
 
-export default function ScrollContainer({ children, container }) {
+export default function ScrollContainer({ children, container, style, className }) {
 
-    const { dimentions } = useDimentions() || {};
+    const { dimentions } = useDimentions()
 
-    /* const width = dimentions?.reduce?.((acu, curr) => {
- 
-         if (curr.orientation === 'horizontal') {
-             return curr.width + acu
-         }
- 
-         return acu
- 
-     }, 0);*/
+    let totalWidth = dimentions
+        .filter(({ orientation }) => orientation === 'horizontal')
+        .reduce((acc, { width }) => acc + width, 0)
 
-    //console.log('width', width)
+    totalWidth = window.innerWidth < totalWidth ? totalWidth : window.innerWidth
 
     return (
         <section
-            className='scroll_container'
+            style={{ width: totalWidth, ...style }}
+            className={`scroll_container ${className||''}`}
             ref={container}
         >
-            <div className='scroll_content'>
-                {children}
-            </div>
+            {children}
         </section>
     )
 }

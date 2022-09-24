@@ -1,35 +1,26 @@
 body {
     margin: 0;
-    color: red;
 }
 
 .scroll_container {
-    width: 100vw;
+    /*The container must to be the screen size 
+    for the scroll to be active*/
+    max-width: 100vw;
     height: 100vh;
     overflow: scroll;
 }
 
-.scroll_content {
-    width: 500vh;
-
-
-    background-image:
-        linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%),
-        linear-gradient(90deg, #000 0%, #000 50%, #FFF 50%, #FFF 100%);
-    background-repeat: repeat;
-    background-size: 1% 5%;
-
-}
-
 .HV-scroll-horizontal-container {
-    border: 5px solid red;
     height: 100vh;
     overflow-y: hidden;
     overflow-x: visible;
 }
 
 .HV-scroll-vertical-container {
-    border: 5px solid blue;
     width: 100vw;
     overflow-x: hidden;
+}
+
+.scrolleable {
+    box-sizing: border-box;
 }
