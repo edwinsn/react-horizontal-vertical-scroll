@@ -1,9 +1,4 @@
-//@TODO make a function to check the intervals are logically correct
-
-
 export default function contolScroll(
-    alturaLosHijos,
-    anchuraDeLosHijos,
     horizontalSections,
     wrapperContainer,
 ) {
@@ -15,18 +10,13 @@ export default function contolScroll(
         e.stopPropagation();
 
 
-        //how much the user scrolls
+        //How much the user scrolls
         const delta = e.deltaY;
-
-        //Max scroll position
-        //const maxScrollY = alturaLosHijos - wrapperContainer.offsetHeight;
-        //const maxScrollX = anchuraDeLosHijos - wrapperContainer.offsetWidth;
-
 
         //Current scroll position
         let scrollY = wrapperContainer.scrollTop;
         let scrollX = wrapperContainer.scrollLeft;
-        const clientWidth = wrapperContainer.clientWidth;
+        const clientWidth = wrapperContainer.clientWidth > window.innerWidth ? window.innerWidth : wrapperContainer.clientWidth;
         const clientHeight = wrapperContainer.clientHeight;
 
         const isHorizontal = isHorizontalRequired(scrollX, scrollY, horizontalSections, delta, clientWidth, clientHeight)
@@ -121,7 +111,6 @@ const isHorizontalRequired = (scrollX, scrollY, horizontalSections, delta, clien
 
         if (isNextPositionAfter) nearestXposition = currentInterval[1]
         else nearestXposition = currentInterval[0]
-        //console.log({ nearestXposition, isNextPositionAfter, currentInterval })
 
     }
 

@@ -13,7 +13,7 @@ export default function ScrollListener({ wrapperContainer }) {
         const horizontalSections = { xSections, ySections };
         const wrapper = wrapperContainer.current
 
-        const scrollListener = controllScroll(undefined, undefined, horizontalSections, wrapperContainer.current);
+        const scrollListener = controllScroll(horizontalSections, wrapperContainer.current);
 
         wrapperContainer.current?.addEventListener('wheel', scrollListener);
 
