@@ -32,7 +32,7 @@ export default function Scrolleable({ children, className, position, orientation
         <div
             style={style}
             ref={ref}
-            className={className}
+            className={className + ' scrolleable'}
         >
             {children}
         </div>

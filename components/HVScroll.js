@@ -5,7 +5,7 @@ import ScrollListener from './ScrollListener';
 import ScrollContainer from './ScrollContainer';
 import '../styles/styles.css'
 
-export default function Wrapper({ children }) {
+export default function Wrapper({ children, style, className }) {
 
   const wrapperContainer = useRef();
 
@@ -15,13 +15,15 @@ export default function Wrapper({ children }) {
       return React.cloneElement(child, { position: i });
     });
 
-
-
   return (
 
     <DimentionsProvider>
       <ScrollListener wrapperContainer={wrapperContainer} />
-      <ScrollContainer container={wrapperContainer}>
+      <ScrollContainer
+        container={wrapperContainer}
+        style={style}
+        className={className}
+      >
         {childrenWithUpdateDimentions}
       </ScrollContainer>
     </DimentionsProvider>
