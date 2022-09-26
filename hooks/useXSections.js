@@ -11,7 +11,7 @@ export default function useXSections() {
         if (scrolleable.orientation === 'horizontal') {
             if (dimentions[index - 1]) {
 
-                let initialCord = (xSections[xSections.length - 1]?.[1]) || 0
+                let initialCord = (xSections[xSections.length - 1]?.[1] - window.innerWidth) || 0
 
                 initialCord = initialCord < 0 ? 0 : initialCord
 
@@ -23,6 +23,7 @@ export default function useXSections() {
 
     });
 
+    console.log('xSections', xSections)
     return xSections
 
 }
