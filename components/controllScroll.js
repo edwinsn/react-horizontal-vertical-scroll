@@ -1,3 +1,6 @@
+//let startYposition = 0
+//let startXposition = 0
+
 export default function contolScroll(
     horizontalSections,
     wrapperContainer,
@@ -16,6 +19,7 @@ export default function contolScroll(
         //Current scroll position
         let scrollY = wrapperContainer.scrollTop;
         let scrollX = wrapperContainer.scrollLeft;
+
         const clientWidth = wrapperContainer.clientWidth > window.innerWidth ? window.innerWidth : wrapperContainer.clientWidth;
         const clientHeight = wrapperContainer.clientHeight;
 
@@ -65,13 +69,17 @@ const isHorizontalRequired = (scrollX, scrollY, horizontalSections, delta, clien
     const inYsection = ySections.some((YInterval) => belongs(scrollY, YInterval))
 
     const currentInterval = ySections.find((YInterval) => belongs(scrollY, YInterval))
-    const notDownEnought = scrollY + clientHeight - 60 > currentInterval?.[1]
+    const notDownEnought = scrollY + (delta < 0 ? 0 : 0) + clientHeight - 60 > currentInterval?.[1]
 
     //In vertical section
     if (!inYsection || !inXsection || notDownEnought) {
 
-        let isOnLimit = ySections.find((Yinterval) => belongs(scrollY + delta, Yinterval)) //&& !notDownEnought
+        let isOnLimit = ySections.find((Yinterval) => belongs(scrollY + delta, Yinterval))
         let nearestYposition = 0
+
+        if (delta < 0 && notDownEnought) {
+            isOnLimit = ySections.find((Yinterval) => belongs(scrollY, Yinterval))
+        }
 
         const nextScrollY = scrollY + delta
         const nextScrollDownEnought = nextScrollY + clientHeight - 60 < currentInterval?.[1]
@@ -96,21 +104,25 @@ const isHorizontalRequired = (scrollX, scrollY, horizontalSections, delta, clien
         }
 
     }
-
     //In horizontal section
-    const isOnLimit = !xSections.some((Xinterval) => belongs(scrollX + delta, Xinterval)) ||
-        !xSections.some((Xinterval) => belongs(scrollX + delta + clientWidth, Xinterval))
+
+    const horizontalInterval = xSections.find((Xinterval, position) => belongs(scrollY, ySections[position]))
+
+    const nextXposition = delta > 0 ? scrollX + delta + clientWidth : scrollX + delta
+    const nextHorizontalInterval = xSections.find((Xinterval) => belongs(nextXposition, Xinterval))
+
+
+    const isOnLimit = !horizontalInterval || !nextHorizontalInterval || (horizontalInterval !== nextHorizontalInterval)
 
     let nearestXposition = 0
 
     if (isOnLimit) {
 
-        const currentInterval = xSections.find((Xinterval) => belongs(scrollX, Xinterval))
-
+        const currentInterval = horizontalInterval
         const isNextPositionAfter = scrollX + clientWidth + delta > currentInterval[1]
 
-        if (isNextPositionAfter) nearestXposition = currentInterval[1]
-        else nearestXposition = currentInterval[0]
+        if (isNextPositionAfter) nearestXposition = currentInterval[1] - window.innerWidth
+        else nearestXposition = currentInterval[0] - window.innerWidth
 
     }
 
