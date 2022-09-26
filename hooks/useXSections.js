@@ -11,7 +11,9 @@ export default function useXSections() {
         if (scrolleable.orientation === 'horizontal') {
             if (dimentions[index - 1]) {
 
-                const initialCord = xSections[xSections.length - 1]?.[1] || 0
+                let initialCord = (xSections[xSections.length - 1]?.[1]) || 0
+
+                initialCord = initialCord < 0 ? 0 : initialCord
 
                 const xSection = [initialCord, initialCord + dimentions[index].width]
                 xSections.push(xSection)

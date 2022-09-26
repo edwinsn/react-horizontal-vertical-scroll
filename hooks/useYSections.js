@@ -10,14 +10,13 @@ export default function useYSections() {
 
         if (scrolleable.orientation === 'horizontal') {
 
-            if (dimentions[index - 1]) {
+            const initialCord = dimentions.slice(0, index)
+                .reduce((acc, curr) => acc + curr.height, 0) || 0
 
-                const initialCord = dimentions[index - 1]?.height || 0
+            const ySection = [initialCord, initialCord + scrolleable.height]
+            ySections.push(ySection)
 
-                const ySection = [initialCord, initialCord + scrolleable.height]
-                ySections.push(ySection)
 
-            }
         }
 
     });
