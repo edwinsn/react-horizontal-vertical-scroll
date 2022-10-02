@@ -23,7 +23,6 @@ export default function useXSections() {
 
     });
 
-    console.log('xSections', xSections)
     return xSections
 
 }

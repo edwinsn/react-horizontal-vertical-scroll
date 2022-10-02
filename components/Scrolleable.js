@@ -45,6 +45,7 @@ export default function Scrolleable({ children, className, position, orientation
         <div
             style={{ ...style, ...positionStyle }}
             ref={ref}
+            tabIndex={-1}
             className={className + ' scrolleable'}
         >
             {children}
