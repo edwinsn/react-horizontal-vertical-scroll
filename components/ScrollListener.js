@@ -28,10 +28,10 @@ export default function ScrollListener({ wrapperContainer }) {
         }
 
         return () => {
-            wrapper?.removeEventListener('wheel', wheelControllScroll);
-            wrapper?.removeEventListener('touchstart', phoneScroll);
-            wrapper?.removeEventListener('touchmove', phoneScroll);
-            wrapper?.removeEventListener('keydown', arrowScroll);
+            wrapper?.removeEventListener('wheel', wheelScrollListener);
+            wrapper?.removeEventListener('touchstart', touchStart);
+            wrapper?.removeEventListener('touchmove', phoneScrollListener);
+            wrapper?.removeEventListener('keydown', keyListener);
 
         }
 
